@@ -8,7 +8,7 @@ const Footer = () => {
           </div>
           <div className="text-gray-500 text-sm text-center space-y-1">
             <p>专注于物理竞赛培训 十余年培训经验</p>
-            <p>Email: contact@proton.edu.cn</p>
+            <p>Email: contact@eduproton.me</p>
             <p>Copyright © 2025 质子物理工作室. All rights reserved.</p>
           </div>
         </div>
