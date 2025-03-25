@@ -18,12 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh" className="h-full">
-      <body className={`${inter.className} min-h-full flex flex-col`}>
-        <Navbar />
-        <main className="flex-grow pt-16">
-          {children}
-        </main>
-        <Footer />
+      <body className={`${inter.className} min-h-full`}>
+        <div className="flex min-h-full flex-col">
+          <Navbar />
+          <main className="flex-grow pt-16">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

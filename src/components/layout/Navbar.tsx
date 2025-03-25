@@ -54,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm shadow-sm z-50">
+    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm shadow-sm z-40">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
