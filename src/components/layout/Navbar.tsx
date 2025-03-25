@@ -71,7 +71,7 @@ const Navbar = () => {
               关于
             </Link>
             <Link href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">
-              商务联系
+              联系我们
             </Link>
             <Link href="/enroll" className="text-gray-600 hover:text-blue-600 transition-colors">
               报名咨询
