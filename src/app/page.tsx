@@ -102,46 +102,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">质子物理工作室</h3>
-              <p className="text-gray-400">梦开始的地方</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">联系我们</h3>
-              <p className="text-gray-400">电话：待添加</p>
-              <p className="text-gray-400">邮箱：待添加</p>
-              <p className="text-gray-400">地址：待添加</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">快速链接</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-                    关于我们
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/enroll" className="text-gray-400 hover:text-white transition-colors">
-                    报名咨询
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
-                    商务合作
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400">&copy; 2025 质子物理工作室. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
