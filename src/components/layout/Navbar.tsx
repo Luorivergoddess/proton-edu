@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState, useRef } from 'react';
-import { FaAtom, FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
+import { FaAtom, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import Avatar from '@/components/common/Avatar';
 
 interface User {
   username: string;
@@ -17,6 +18,7 @@ const Navbar = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   const checkUserStatus = () => {
     const user = localStorage.getItem('currentUser');
@@ -37,7 +39,6 @@ const Navbar = () => {
         setIsMenuOpen(false);
       }
       
-      // 点击外部时关闭移动菜单
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node) && 
           (event.target as HTMLElement).id !== 'mobile-menu-button') {
         setIsMobileMenuOpen(false);
@@ -58,9 +59,11 @@ const Navbar = () => {
     localStorage.removeItem('currentUser');
     setCurrentUser(null);
     setIsMenuOpen(false);
-    setIsMobileMenuOpen(false); // 登出时关闭移动菜单
+    setIsMobileMenuOpen(false);
     router.push('/');
   };
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm shadow-sm z-40">
@@ -75,35 +78,56 @@ const Navbar = () => {
           
           {/* 桌面导航 */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <Link 
+              href="/" 
+              className={`text-gray-600 hover:text-blue-600 transition-colors ${isActive('/') ? 'text-blue-600' : ''}`}
+            >
               主页
             </Link>
-            <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <Link 
+              href="/about" 
+              className={`text-gray-600 hover:text-blue-600 transition-colors ${isActive('/about') ? 'text-blue-600' : ''}`}
+            >
               关于
             </Link>
-            <Link href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <Link 
+              href="/contact" 
+              className={`text-gray-600 hover:text-blue-600 transition-colors ${isActive('/contact') ? 'text-blue-600' : ''}`}
+            >
               联系我们
             </Link>
-            <Link href="/enroll" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <Link 
+              href="/enroll" 
+              className={`text-gray-600 hover:text-blue-600 transition-colors ${isActive('/enroll') ? 'text-blue-600' : ''}`}
+            >
               报名咨询
             </Link>
-            <Link href="/resources" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <Link 
+              href="/resources" 
+              className={`text-gray-600 hover:text-blue-600 transition-colors ${isActive('/resources') ? 'text-blue-600' : ''}`}
+            >
               资料获取
             </Link>
             {currentUser ? (
               <div className="relative" ref={menuRef}>
                 <button 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex items-center space-x-2 px-4 py-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition-colors"
+                  className={`flex items-center space-x-3 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors ${
+                    isActive('/profile') ? 'bg-gray-100' : ''
+                  }`}
                 >
-                  <FaUserCircle size={20} />
-                  <span>个人中心</span>
+                  <Avatar username={currentUser.username} size="sm" />
+                  <span className="text-gray-700">{currentUser.username}</span>
                 </button>
                 {isMenuOpen && (
                   <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
-                    <div className="px-4 py-2 text-sm text-gray-600 border-b border-gray-100">
-                      {currentUser.username}
-                    </div>
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      个人中心
+                    </Link>
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
@@ -115,10 +139,16 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center space-x-2">
-                <Link href="/auth/register" className="px-4 py-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition-colors">
+                <Link 
+                  href="/auth/register" 
+                  className="px-4 py-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition-colors"
+                >
                   注册
                 </Link>
-                <Link href="/auth/login" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                <Link 
+                  href="/auth/login" 
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                >
                   登录
                 </Link>
               </div>
@@ -147,50 +177,73 @@ const Navbar = () => {
         <div className="px-4 py-3 space-y-1">
           <Link
             href="/"
-            className="block py-2 text-gray-600 hover:text-blue-600 transition-colors border-b border-gray-100"
+            className={`block py-2 transition-colors ${
+              isActive('/') ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
+            } border-b border-gray-100`}
             onClick={() => setIsMobileMenuOpen(false)}
           >
             主页
           </Link>
           <Link
             href="/about"
-            className="block py-2 text-gray-600 hover:text-blue-600 transition-colors border-b border-gray-100"
+            className={`block py-2 transition-colors ${
+              isActive('/about') ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
+            } border-b border-gray-100`}
             onClick={() => setIsMobileMenuOpen(false)}
           >
             关于
           </Link>
           <Link
             href="/contact"
-            className="block py-2 text-gray-600 hover:text-blue-600 transition-colors border-b border-gray-100"
+            className={`block py-2 transition-colors ${
+              isActive('/contact') ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
+            } border-b border-gray-100`}
             onClick={() => setIsMobileMenuOpen(false)}
           >
             联系我们
           </Link>
           <Link
             href="/enroll"
-            className="block py-2 text-gray-600 hover:text-blue-600 transition-colors border-b border-gray-100"
+            className={`block py-2 transition-colors ${
+              isActive('/enroll') ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
+            } border-b border-gray-100`}
             onClick={() => setIsMobileMenuOpen(false)}
           >
             报名咨询
           </Link>
           <Link
             href="/resources"
-            className="block py-2 text-gray-600 hover:text-blue-600 transition-colors border-b border-gray-100"
+            className={`block py-2 transition-colors ${
+              isActive('/resources') ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
+            } border-b border-gray-100`}
             onClick={() => setIsMobileMenuOpen(false)}
           >
             资料获取
           </Link>
           
-          {/* 移动端的登录/注册或用户信息 */}
+          {/* 移动端的用户信息 */}
           <div className="py-4">
             {currentUser ? (
               <div className="space-y-2">
-                <div className="px-2 py-1 text-sm text-gray-600 border-b border-gray-100">
-                  已登录为：{currentUser.username}
+                <div className="flex items-center space-x-3 px-2 py-2">
+                  <Avatar username={currentUser.username} size="sm" />
+                  <div>
+                    <p className="font-medium">{currentUser.username}</p>
+                    <p className="text-sm text-gray-500">{currentUser.email}</p>
+                  </div>
                 </div>
+                <Link
+                  href="/profile"
+                  className={`block py-2 transition-colors px-2 rounded-lg ${
+                    isActive('/profile') ? 'bg-gray-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  个人中心
+                </Link>
                 <button
                   onClick={handleLogout}
-                  className="block w-full text-left px-2 py-2 text-gray-800 hover:bg-gray-100 rounded"
+                  className="w-full text-left px-2 py-2 text-gray-800 hover:bg-gray-100 rounded-lg"
                 >
                   退出登录
                 </button>
