@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-20 px-4">
+      <section className="bg-gradient-to-b from-blue-50 to-[rgb(248,249,250)] py-20 px-4">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
             质子物理工作室

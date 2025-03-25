@@ -14,19 +14,6 @@ body {
   position: relative;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  z-index: -1;
-  background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.12'%3E%3C!-- 原子模型1 --%3E%3Cellipse cx='60' cy='60' rx='20' ry='10' fill='none' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' transform='rotate(-30 60 60)' /%3E%3Cellipse cx='60' cy='60' rx='20' ry='10' fill='none' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' transform='rotate(30 60 60)' /%3E%3Ccircle cx='60' cy='60' r='2' /%3E%3C!-- 波函数 --%3E%3Cpath d='M200 50 Q 220 30, 240 50 Q 260 70, 280 50' fill='none' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' /%3E%3C!-- 薛定谔方程 --%3E%3Ctext x='40' y='140' font-family='Arial' font-size='12' fill='%23000000' fill-opacity='0.12'%3Eiℏ∂/∂t%3C/text%3E%3C!-- 相对论公式 --%3E%3Ctext x='180' y='120' font-family='Arial' font-size='14' fill='%23000000' fill-opacity='0.12'%3EE=mc²%3C/text%3E%3C!-- 力学公式 --%3E%3Ctext x='50' y='200' font-family='Arial' font-size='12' fill='%23000000' fill-opacity='0.12'%3EF=ma%3C/text%3E%3C!-- 矢量场 --%3E%3Cpath d='M240 180 L 260 180 L 255 175 M 260 180 L 255 185' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' fill='none' /%3E%3C!-- 电磁波 --%3E%3Cpath d='M40 260 C 60 240, 80 280, 100 260' fill='none' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' /%3E%3C!-- 原子模型2 --%3E%3Ccircle cx='200' cy='220' r='2' /%3E%3Ccircle cx='200' cy='220' r='8' fill='none' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' /%3E%3Ccircle cx='200' cy='220' r='14' fill='none' stroke='%23000000' stroke-width='1' stroke-opacity='0.12' /%3E%3C!-- 量子数 --%3E%3Ctext x='150' y='270' font-family='Arial' font-size='10' fill='%23000000' fill-opacity='0.12'%3En,l,m%3C/text%3E%3C!-- Maxwell方程 --%3E%3Ctext x='240' y='240' font-family='Arial' font-size='10' fill='%23000000' fill-opacity='0.12'%3E∇⋅E=ρ/ε₀%3C/text%3E%3C/g%3E%3C/svg%3E");
-  background-size: 300px 300px;
-}
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
